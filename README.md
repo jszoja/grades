@@ -15,4 +15,4 @@ Endpoint should be available at:
 http://localhost:9090/api/grades
 
 ## Testing
-`./vendor/bin/sail test tests/Feature/ExampleTest.php`
+`./vendor/bin/sail artisan test tests/Feature/ExampleTest.php `
