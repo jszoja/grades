@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use JetBrains\PhpStorm\ArrayShape;
 
 class Student
 {
@@ -29,7 +30,7 @@ class Student
         self::$counter++;
         $this->__validate($data);
         $this->__name = $data['name'];
-        $this->__grade = $this->parseGrade($data['grade']);
+        $this->parseGrade($data['grade']);
     }
 
     /**
@@ -50,16 +51,43 @@ class Student
     /**
      *
      * @param mixed $grade
-     * @return int
+     * @return void
      */
-    public function parseGrade(mixed $grade) : int
+    public function parseGrade(mixed $grade)
     {
         $this->__grade = (int)$grade;
         $this->__pass = $this->__grade >= 35;
+
+        if( $this->__pass) {
+            $this->__grade = static::roundGrade($this->__grade);
+        }
+
+    }
+
+    /**
+     * If the difference between the grade and the next multiple of 5 is less than 3,
+     * round grade up to the next multiple of 5
+     *
+     * @param int $grade
+     * @return int
+     */
+    public static function roundGrade(int $grade) : int
+    {
+        $rest = $grade % 5;
+        if($rest >= 3) {
+            return $grade+(5-$rest);
+        }
+
         return $grade;
     }
 
 
+    /**
+     * Return parsed student data as associative array
+     *
+     * @return array
+     */
+    #[ArrayShape(['name' => "mixed|string", 'grade' => "int", 'pass' => "bool"])]
     public function asArray() : array
     {
         return ['name' => $this->__name, 'grade' => $this->__grade, 'pass' => $this->__pass];
