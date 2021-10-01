@@ -8,6 +8,7 @@ use JetBrains\PhpStorm\ArrayShape;
 
 class Student
 {
+    const PASS_GRADE = 35;
     /**
      * @var int count student records passed
      */
@@ -56,7 +57,7 @@ class Student
     public function parseGrade(mixed $grade)
     {
         $this->__grade = (int)$grade;
-        $this->__pass = $this->__grade >= 35;
+        $this->__pass = $this->__grade >= self::PASS_GRADE;
 
         if( $this->__pass) {
             $this->__grade = static::roundGrade($this->__grade);
