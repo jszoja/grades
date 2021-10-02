@@ -2,11 +2,17 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
+use Tests\CreatesApplication;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
+//    use CreatesApplication;
+
+
     /**
      * A basic test example.
      *
@@ -14,6 +20,11 @@ class ExampleTest extends TestCase
      */
     public function test_ok()
     {
+        Sanctum::actingAs(
+            User::factory()->create(),
+            ['*']
+        );
+
         $response = $this->postJson('/api/grades',[
             [ "name" => "John", "grade" => 53 ],
             [ "name" => "Jane", "grade" => 68 ],
@@ -41,10 +52,17 @@ class ExampleTest extends TestCase
 
     public function test_failed_json()
     {
+        Sanctum::actingAs(
+            User::factory()->create(),
+            ['*']
+        );
+
         $response = $this->post('/api/grades', ['wrong']);
 
         $response->assertJson(['error' => 'Unsupported json format']);
         $response->assertStatus(400);
 
     }
+
+
 }
