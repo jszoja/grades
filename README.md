@@ -27,7 +27,7 @@ First you need to reqister with HTTP POST:
 
 http://localhost:9090/api/register
 
-```OST http://localhost:9090/api/register
+```POST http://localhost:9090/api/register
 Accept: application/json
 Content-Type: application/x-www-form-urlencoded
 
@@ -41,6 +41,17 @@ http://localhost:9090/api/logout
 ```POST http://localhost:9090/api/logout
 Accept: application/json
 Authorization: Bearer 1|WIN9lqFSxaeHIevahsi9qtCmpNA03FO1mTABmOOk
+```
+
+You can use your existing login to get the token via HTTP POST:
+
+http://localhost:9090/api/login
+
+```POST http://localhost:9090/api/login
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+email=user@gmail.com&password=mypass123
 ```
 
 
