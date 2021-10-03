@@ -2,17 +2,18 @@
 
 ## Installation
 
-1. Install dependencies with composer
-
-`composer install`
-
-2. Start the app in docker via Laravel Sail
-
+1. Start the app in docker via Laravel Sail  
 `./vendor/bin/sail up`
 
-## App access
-Endpoint should be available at HTTP POST:
+2. Install dependencies with composer  
+`./vendor/bin/sail composer install`
 
+3. Run migrations  
+`./vendor/bin/sail artisan migrate`
+
+
+## App access
+Endpoint should be available at HTTP POST:  
 http://localhost:9090/api/grades
 
 ```
@@ -23,8 +24,7 @@ Authorization: Bearer {{auth token}}
 
 It uses Bearer authentication.
 
-First you need to reqister with HTTP POST:
-
+First you need to reqister with HTTP POST:  
 http://localhost:9090/api/register
 
 ```POST http://localhost:9090/api/register
@@ -34,8 +34,7 @@ Content-Type: application/x-www-form-urlencoded
 name=Jan&email=user@gmail.com&password=mypass123&password_confirmation=mypass123
 ```
 
-To logout use HTTP POST to:
-
+To logout use HTTP POST to:  
 http://localhost:9090/api/logout
 
 ```POST http://localhost:9090/api/logout
@@ -43,8 +42,7 @@ Accept: application/json
 Authorization: Bearer 1|WIN9lqFSxaeHIevahsi9qtCmpNA03FO1mTABmOOk
 ```
 
-You can use your existing login to get the token via HTTP POST:
-
+You can use your existing login to get the token via HTTP POST:  
 http://localhost:9090/api/login
 
 ```POST http://localhost:9090/api/login
