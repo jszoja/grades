@@ -2,13 +2,26 @@
 
 ## Installation
 
-1. Start the app in docker via Laravel Sail  
+1. Install dependencies with composer on local machine  
+`composer install`
+
+2. Set environment variables
+
+Copy .env.example to .env file  
+`cp .env.example .env`  
+
+Please adjust app/database ports by adding APP_PORT and FORWARD_DB_PORT
+variables to .env file.
+
+3. Start the app in docker via Laravel Sail  
 `./vendor/bin/sail up`
 
-2. Install dependencies with composer  
-`./vendor/bin/sail composer install`
+4. Update dependencies with composer on docker  
+`./vendor/bin/sail composer update`
 
-3. Run migrations  
+This will update dependencies to PHP 8.x on docker.
+
+6. Run migrations  
 `./vendor/bin/sail artisan migrate`
 
 
